@@ -28,7 +28,7 @@ variable "clustername" {
 
 
 data "intersight_kubernetes_cluster" "iks" {
-name = local.clustername
+name = var.clustername
 }
 
 terraform {
@@ -65,7 +65,7 @@ client_key = base64decode(yamldecode(base64decode(data.intersight_kubernetes_clu
 
 resource helm_release helloiksfrtfcb {
   name       = "iwocollector"
-  namespace = "iwo-collector"
+  namespace = "default"
   chart = "https://github.com/abhcld/iks-ist-iwo-helmchart-demo/raw/main/iwo-k8s-collector-v1.0.1.tgz"
   set {
     name  = "iwoServerVersion"
